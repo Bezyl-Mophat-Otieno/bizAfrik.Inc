@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles, Zap, Clock } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -13,23 +13,42 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
+            <div className="flex items-center gap-2 mb-6">
+              <Sparkles className="w-5 h-5 text-primary" />
+              <span className="text-sm font-medium bg-primary/10 text-primary px-3 py-1 rounded-full">
+                AI-Powered Development
+              </span>
+            </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="text-primary">Innovative Solutions</span>
+              <span className="text-primary">5 Days</span> from
               <br />
-              for the African Economy
+              Concept to Launch
             </h1>
             <p className="text-lg md:text-xl text-foreground/80 mb-8">
-              Empowering businesses across Africa with cutting-edge technology solutions
-              that drive growth and innovation.
+              Revolutionizing African businesses with AI-accelerated development. 
+              We bridge the gap between imagination and reality, delivering 
+              enterprise-grade solutions at unprecedented speed.
             </p>
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.05 }}
-              className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium shadow-lg hover:bg-primary/90 transition-colors"
-            >
-              Get Started
-              <ArrowRight className="ml-2" size={20} />
-            </motion.a>
+            <div className="flex flex-col sm:flex-row gap-4 mb-8">
+              <motion.a
+                href="#contact"
+                whileHover={{ scale: 1.05 }}
+                className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium shadow-lg hover:bg-primary/90 transition-colors"
+              >
+                Start Your Project
+                <ArrowRight className="ml-2" size={20} />
+              </motion.a>
+              <div className="flex items-center gap-4 text-sm text-foreground/80">
+                <div className="flex items-center gap-2">
+                  <Zap className="w-4 h-4 text-primary" />
+                  <span>AI-Powered</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-primary" />
+                  <span>5-Day Delivery</span>
+                </div>
+              </div>
+            </div>
           </motion.div>
 
           <motion.div
@@ -69,13 +88,13 @@ export default function Hero() {
                   fill="none"
                 />
 
-                {/* Tech Elements */}
+                {/* AI/Tech Elements */}
                 <motion.g
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 1.5, duration: 1 }}
                 >
-                  {/* Circuit Lines */}
+                  {/* Neural Network Lines */}
                   <path
                     d="M150,150 L250,150 M200,100 L200,200 M300,200 L350,200"
                     stroke="currentColor"
@@ -83,15 +102,36 @@ export default function Hero() {
                     className="text-primary/60"
                   />
                   
-                  {/* Connection Nodes */}
-                  <circle cx="150" cy="150" r="4" className="fill-primary" />
-                  <circle cx="250" cy="150" r="4" className="fill-primary" />
-                  <circle cx="200" cy="100" r="4" className="fill-primary" />
-                  <circle cx="200" cy="200" r="4" className="fill-primary" />
-                  <circle cx="300" cy="200" r="4" className="fill-primary" />
+                  {/* AI Nodes */}
+                  <circle cx="150" cy="150" r="4" className="fill-primary">
+                    <animate
+                      attributeName="opacity"
+                      values="0.3;1;0.3"
+                      dur="2s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                  <circle cx="250" cy="150" r="4" className="fill-primary">
+                    <animate
+                      attributeName="opacity"
+                      values="0.3;1;0.3"
+                      dur="2s"
+                      repeatCount="indefinite"
+                      begin="0.5s"
+                    />
+                  </circle>
+                  <circle cx="200" cy="100" r="4" className="fill-primary">
+                    <animate
+                      attributeName="opacity"
+                      values="0.3;1;0.3"
+                      dur="2s"
+                      repeatCount="indefinite"
+                      begin="1s"
+                    />
+                  </circle>
                 </motion.g>
 
-                {/* Animated Pulse Elements */}
+                {/* Animated Data Flow */}
                 <motion.circle
                   cx="200"
                   cy="150"
