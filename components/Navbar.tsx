@@ -4,15 +4,16 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Sun, Moon, Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 
 const navItems = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Services", href: "#services" },
-  // { name: "Portfolio", href: "#portfolio" },
-  { name: "Clients", href: "#clients" },
-  { name: "Testimonials", href: "#testimonials" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/#about" },
+  { name: "Services", href: "/#services" },
+  { name: "Portfolio", href: "/portfolio" },
+  { name: "Clients", href: "/#clients" },
+  { name: "Testimonials", href: "/#testimonials" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -28,25 +29,27 @@ export default function Navbar() {
     <nav className="fixed w-full bg-background/80 backdrop-blur-md z-50 border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="text-2xl font-bold text-primary"
-          >
-            BizAfric.Inc
-          </motion.div>
+          <Link href="/">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="text-2xl font-bold text-primary"
+            >
+              BizAfric.Inc
+            </motion.div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <motion.a
-                key={item.name}
-                href={item.href}
-                whileHover={{ scale: 1.05 }}
-                className="text-foreground/80 hover:text-primary transition-colors"
-              >
-                {item.name}
-              </motion.a>
+              <Link key={item.name} href={item.href}>
+                <motion.span
+                  whileHover={{ scale: 1.05 }}
+                  className="text-foreground/80 hover:text-primary transition-colors"
+                >
+                  {item.name}
+                </motion.span>
+              </Link>
             ))}
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -82,14 +85,15 @@ export default function Navbar() {
           >
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item) => (
-                <a
+                <Link
                   key={item.name}
                   href={item.href}
-                  className="block px-3 py-2 rounded-md text-base font-medium text-foreground/80 hover:text-primary hover:bg-primary/10"
                   onClick={() => setIsOpen(false)}
                 >
-                  {item.name}
-                </a>
+                  <span className="block px-3 py-2 rounded-md text-base font-medium text-foreground/80 hover:text-primary hover:bg-primary/10">
+                    {item.name}
+                  </span>
+                </Link>
               ))}
             </div>
           </motion.div>

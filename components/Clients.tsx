@@ -1,65 +1,62 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useMotionValue, animate } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Building2, Users2, Globe2, Award } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const stats = [
   {
     icon: <Building2 className="w-8 h-8" />,
-    value: "50+",
+    value: "200+",
     label: "Clients Served",
     duration: 2
   },
   {
     icon: <Users2 className="w-8 h-8" />,
-    value: "10+",
+    value: "50+",
     label: "Team Members",
     duration: 1.5
   },
   {
     icon: <Globe2 className="w-8 h-8" />,
-    value: "2+",
+    value: "15+",
     label: "African Countries",
     duration: 1.8
   },
   {
     icon: <Award className="w-8 h-8" />,
-    value: "3+",
-    label: "Award Won",
+    value: "25+",
+    label: "Awards Won",
     duration: 1.6
   }
 ];
 
 const CountingNumber = ({ value, duration }: { value: string; duration: number }) => {
   const numericValue = parseInt(value);
+  const [count, setCount] = useState(0);
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1
   });
 
+  useEffect(() => {
+    if (inView) {
+      const controls = animate(0, numericValue, {
+        duration,
+        onUpdate: (latest) => setCount(Math.round(latest)),
+      });
+
+      return controls.stop;
+    }
+  }, [inView, numericValue, duration]);
+
   return (
     <motion.span
       ref={ref}
-      initial={{ opacity: 0 }}
-      animate={inView ? { opacity: 1 } : { opacity: 0 }}
       className="text-4xl md:text-5xl font-bold text-primary"
     >
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.2 }}
-      >
-        {inView ? (
-          <motion.span
-            initial={{ value: 0 }}
-            animate={{ value: numericValue }}
-            transition={{ duration }}
-          >
-            {value}
-          </motion.span>
-        ) : "0"}
-      </motion.span>
+      {count}
       {value.includes("+") && "+"}
     </motion.span>
   );
